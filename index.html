@@ -7,11 +7,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary: #2563eb;
-            --dark: #1e293b;
+            --primary: #1466ea;
+            --accent: #a4c7f2;
+            --dark: #0f172a;
             --light: #f8fafc;
+            --white: #ffffff;
             --grey: #64748b;
-            --transition: all 0.3s ease;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
@@ -22,9 +24,12 @@
         }
 
         body {
-            background-color: var(--light);
+            background-color: #a4c6ef;
             color: var(--dark);
             line-height: 1.6;
+            /* Modern vibrant background */
+            background-image: radial-gradient(at 0% 0%, hsla(215, 98%, 61%, 0.05) 0, transparent 50%), 
+                              radial-gradient(at 50% 0%, hsla(225, 96%, 67%, 0.05) 0, transparent 50%);
         }
 
         html {
@@ -33,7 +38,8 @@
 
         /* --- Navigation --- */
         nav {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
             height: 70px;
             display: flex;
             justify-content: space-between;
@@ -43,7 +49,7 @@
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .logo {
@@ -72,21 +78,27 @@
             color: var(--primary);
         }
 
-        /* --- Hero Section --- */
+        /* --- Hero Section Updated --- */
         .hero {
             height: 100vh;
             display: flex;
-            flex-direction: column;
+            flex-direction: row; /* Horizontal for desktop */
             justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: 0 20px;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            gap: 60px;
+            padding: 0 10%;
+            background: linear-gradient(135deg, #fafafa 0%, #8ebbf5 105%);
+        }
+
+        .hero-content {
+            flex: 1;
+            text-align: left;
         }
 
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
+            line-height: 1.1;
         }
 
         .hero p {
@@ -95,18 +107,43 @@
             margin-bottom: 2rem;
         }
 
+        /* Hero Image Frame */
+        .hero-img-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image {
+            width: 320px;
+            height: 320px;
+            border-radius: 30px;
+            object-fit: cover;
+            border: 8px solid var(--white);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: rotate(-3deg);
+            transition: var(--transition);
+        }
+
+        .hero-image:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
         .btn {
             padding: 12px 30px;
             background: var(--primary);
             color: white;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 8px;
             transition: var(--transition);
+            display: inline-block;
+            font-weight: 600;
         }
 
         .btn:hover {
             background: #1d4ed8;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
         }
 
         /* --- Section Styling --- */
@@ -123,7 +160,7 @@
 
         .section-title::after {
             content: '';
-            width: 50px;
+            width: 60px;
             height: 4px;
             background: var(--primary);
             position: absolute;
@@ -138,7 +175,7 @@
             grid-template-columns: 1fr;
             gap: 40px;
             align-items: center;
-            max-width: 700px;
+            max-width: 750px;
             margin: 0 auto;
             text-align: center;
         }
@@ -146,15 +183,20 @@
         .skills {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 25px;
         }
 
         .skill-tag {
-            background: #e2e8f0;
-            padding: 5px 15px;
-            border-radius: 20px;
+            background: var(--white);
+            color: var(--primary);
+            border: 1px solid var(--accent);
+            padding: 8px 20px;
+            border-radius: 50px;
             font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         /* --- Projects Grid --- */
@@ -165,56 +207,173 @@
         }
 
         .project-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
             transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
 
         .project-card:hover {
             transform: translateY(-10px);
+            background: var(--white);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08);
         }
 
         .project-info {
-            padding: 20px;
+            flex-grow: 1;
+            margin-bottom: 20px;
         }
 
         .project-info h3 {
             margin-bottom: 10px;
+            color: var(--dark);
         }
 
-        /* --- Contact Section --- */
+        /* --- Project Action Buttons --- */
+        .project-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            flex: 1;
+            text-align: center;
+            padding: 12px 5px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: var(--transition);
+            border: 1px solid #e2e8f0;
+        }
+
+        .btn-git {
+            background: var(--dark);
+            color: white;
+            border: none;
+        }
+
+        .btn-git:hover {
+            background: #334155;
+        }
+
+        .btn-more {
+            background: var(--white);
+            color: var(--dark);
+            cursor: pointer;
+        }
+
+        .btn-more:hover {
+            background: #f1f5f9;
+        }
+
+        /* --- Modal Styling --- */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 2000; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(8px);
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            margin: 50px auto; 
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 650px;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            animation: zoomIn 0.3s ease;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 25px;
+            top: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--grey);
+            transition: 0.2s;
+        }
+
+        .close-btn:hover { color: var(--dark); }
+
+        .modal-body p {
+            margin-top: 15px;
+            color: #475569;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* --- Contact Section Fix --- */
+        #contact {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         .contact-container {
+            width: 100%;
             max-width: 600px;
             margin: 0 auto;
-            background: white;
+            background: var(--white);
             padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-radius: 20px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
         }
 
         .form-group {
             margin-bottom: 20px;
+            text-align: left;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
         }
 
-        .form-group input, .form-group textarea {
+        .form-group input, 
+        .form-group textarea {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
 
         /* --- Responsive --- */
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .about-container { grid-template-columns: 1fr; }
+            .hero { flex-direction: column-reverse; text-align: center; padding-top: 120px; }
             .hero h1 { font-size: 2.5rem; }
+            .hero-image { width: 250px; height: 250px; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
@@ -231,9 +390,20 @@
     </nav>
 
     <section class="hero" id="home">
-        <h1>Hi, I'm <span style="color:var(--primary)">KM Vinayak Ram</span></h1>
-        <p>Computer Science Student | Web Developer | Tech Enthusiast</p>
-        <a href="#projects" class="btn">View My Work</a>
+        <div class="hero-content">
+            <h1 style="line-height: 1.2;">
+                <div>Hello, I'm</div>
+                <span style="color:var(--primary); text-transform: uppercase;">KM Vinayak Ram</span>
+            </h1>
+            <p>Computer Science Student | Web Developer | Tech Enthusiast</p>
+            <div style="display: flex; gap: 15px; justify-content: flex-start;">
+                <a href="#projects" class="btn">View My Work</a>
+                <a href="#contact" class="btn" style="background: var(--dark);">Hire Me</a>
+            </div>
+        </div>
+        <div class="hero-img-container">
+            <img src="profile.jpg" alt="Vinayak Ram" class="hero-image">
+        </div>
     </section>
 
     <section id="about">
@@ -249,31 +419,65 @@
                     <span class="skill-tag">Networking</span>
                 </div>
             </div>
-         <div>
-
+        </div>
     </section>
 
     <section id="projects">
         <h2 class="section-title">Projects</h2>
         <div class="project-grid">
+            
             <div class="project-card">
                 <div class="project-info">
                     <h3>AmbuBeam</h3>
                     <p>An AI-powered green corridor system designed to prioritize emergency vehicles in traffic.</p>
                 </div>
+                <div class="project-actions">
+                    <a href="https://github.com/VinayakRamKM/AmbuBeam-Simulation" target="_blank" class="action-btn btn-git">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="javascript:void(0)" class="action-btn btn-more" onclick="openAmbuBeam()">Read More</a>
+                </div>
             </div>
+
             <div class="project-card">
                 <div class="project-info">
                     <h3>Online Cab Booking</h3>
                     <p>A responsive web interface built with HTML and CSS for a streamlined user booking experience.</p>
                 </div>
+                <div class="project-actions">
+                    <a href="https://github.com/VinayakRamKM/CAB-Booking" target="_blank" class="action-btn btn-git">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="#" class="action-btn btn-more">Read More</a>
+                </div>
             </div>
+
+            <div class="project-card">
+                <div class="project-info">
+                    <h3>Human Detection and Counting</h3>
+                    <p>A computer vision project for detecting and counting humans in real-time using OpenCV and Python.</p>
+                </div>
+                <div class="project-actions">
+                    <a href="https://github.com/VinayakRamKM/Human-Detector" target="_blank" class="action-btn btn-git">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="javascript:void(0)" class="action-btn btn-more" onclick="openHuman()">Read More</a>
+                </div>
+            </div>
+
             <div class="project-card">
                 <div class="project-info">
                     <h3>Web Scraper</h3>
                     <p>A Python-based news scraping tool integrated with a React frontend for data visualization.</p>
                 </div>
+                <div class="project-actions">
+                    <a href="https://github.com/VinayakRamKM/Doorkey" target="_blank" class="action-btn btn-git">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="#" class="action-btn btn-more">Read More</a>
+                </div>
             </div>
+
         </div>
     </section>
 
@@ -302,5 +506,56 @@
         <p>&copy; 2026 K M Vinayak Ram. Built with passion.</p>
     </footer>
 
+    <div id="ambubeamModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeAmbuBeam()">&times;</span>
+            <h2 style="color: var(--primary);">AmbuBeam Project Details</h2>
+            <div class="modal-body">
+                <p>The AmbuBeam project focuses on developing an AI-powered green corridor system to eliminate life-threatening ambulance delays at traffic intersections. The motivation for this work stems from the critical time lost by emergency vehicles due to poor signal prioritization, leading to undesirable statistics where over 30% of ambulance trips are delayed and 1 in 5 critical patients do not reach the hospital in time. This initiative aims to address a significant public health issue and improve emergency response.  </p>
+                <p>The scope of AmbuBeam involves creating an automated system using smart reflectors with embedded audio sensors to detect ambulance sirens. The methodology includes data triangulation to determine ambulance location and overriding the nearest VAC signal logic to clear the path. This solution is designed to be low-cost, energy-efficient, and scalable, leveraging solar power for self-sustenance.  </p>
+                <p>The main results indicate a viable product with core features like siren detection, solar power, wireless communication via RF/LoRa modules, and signal override logic. Customer validation involved discussions with traffic police and ambulance drivers to understand the problem and validate the product. The project's conclusion is that AmbuBeam offers a competitive edge by providing a GPS-independent, low maintenance, and retrofittable solution to existing traffic systems.  </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="humanModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeHuman()">&times;</span>
+            <h2 style="color: var(--primary);">Human Detection Project Details</h2>
+            <div class="modal-body">
+                <p>The Human Detector and People Counter is a computer vision project developed using Python and the OpenCV library with the YOLOv3 deep learning model. The system utilizes a webcam to perform real-time human detection and counting by identifying people within video frames. By processing each frame using the YOLO object detection algorithm, the program can detect the presence of individuals and display bounding boxes around them while simultaneously maintaining a live count of the number of people detected.</p>
+                <p>The application works by loading pre-trained YOLO configuration and weight files along with the COCO dataset class labels to identify objects, specifically focusing on the person class. Frames captured from the camera are converted into blobs and passed through the neural network for detection. The program filters detections based on confidence scores and applies non-maximum suppression to remove duplicate detections, ensuring that each individual is counted only once per frame. A real-time display window shows the video feed with bounding boxes, timestamps, and the total number of detected people.</p>
+                <p>This project demonstrates practical knowledge in computer vision, deep learning integration, and real-time video processing. It highlights the ability to work with pre-trained neural networks, manage external model files, and build an interactive detection system using Python. Such a system can be applied in areas like crowd monitoring, security surveillance, smart buildings, and occupancy analysis, making it a useful example of applying artificial intelligence techniques to real-world problems.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const modalAmbu = document.getElementById("ambubeamModal");
+        const modalHuman = document.getElementById("humanModal");
+
+        function openAmbuBeam() {
+            modalAmbu.style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+        function closeAmbuBeam() {
+            modalAmbu.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        function openHuman() {
+            modalHuman.style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+        function closeHuman() {
+            modalHuman.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modalAmbu) closeAmbuBeam();
+            if (event.target == modalHuman) closeHuman();
+        }
+    </script>
 </body>
 </html>
