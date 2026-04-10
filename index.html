@@ -448,7 +448,7 @@
                     <a href="https://github.com/VinayakRamKM/CAB-Booking" target="_blank" class="action-btn btn-git">
                         <i class="fab fa-github"></i> GitHub
                     </a>
-                    <a href="#" class="action-btn btn-more">Read More</a>
+                    <a href="javascript:void(0)" class="action-btn btn-more" onclick="openCabBooking()">Read More</a>
                 </div>
             </div>
 
@@ -547,6 +547,7 @@
 
     <script>
         const modalAmbu = document.getElementById("ambubeamModal");
+        const modalCab = document.getElementById("cabbookingModal");
         const modalHuman = document.getElementById("humanModal");
 
         function openAmbuBeam() {
@@ -555,6 +556,15 @@
         }
         function closeAmbuBeam() {
             modalAmbu.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        function openCabBooking() {
+            modalCab.style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+        function closeCabBooking() {
+            modalCab.style.display = "none";
             document.body.style.overflow = "auto";
         }
 
@@ -569,6 +579,7 @@
 
         window.onclick = function(event) {
             if (event.target == modalAmbu) closeAmbuBeam();
+            if (event.target == modalCab) closeCabBooking();
             if (event.target == modalHuman) closeHuman();
         }
     </script>
