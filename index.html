@@ -474,7 +474,7 @@
                     <a href="https://github.com/VinayakRamKM/Doorkey" target="_blank" class="action-btn btn-git">
                         <i class="fab fa-github"></i> GitHub
                     </a>
-                    <a href="#" class="action-btn btn-more">Read More</a>
+                    <a href="javascript:void(0)" class="action-btn btn-more" onclick="openWebscraper()">Read More</a>
                 </div>
             </div>
 
@@ -545,10 +545,23 @@
         </div>
     </div>
 
+
+    <div id="webscraperModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeWebscraper()">&times;</span>
+            <h2 style="color: var(--primary);">Web Scraper Project Details</h2>
+            <div class="modal-body">
+                <p>The Web Scraper is a Python-based project designed to extract data from the designated API websites automatically. It utilizes requests to navigate web pages, parse HTML content, and retrieve specific information. The scraper is configured to target the website and extract the news related to the specified keywords.</p>
+                <p>This project can be useful in web development, data extraction, and automation. It highlights the ability to work with HTTP requests, parse HTML content, and handle different data formats. The scraper can be applied in scenarios like price comparison, social media monitoring, market research, and content aggregation.</p>
+            </div>
+        </div>
+    </div>
+
     <script>
         const modalAmbu = document.getElementById("ambubeamModal");
         const modalCab = document.getElementById("cabbookingModal");
         const modalHuman = document.getElementById("humanModal");
+        const modalWebscraper = document.getElementById("webscraperModal");
 
         function openAmbuBeam() {
             modalAmbu.style.display = "block";
@@ -577,10 +590,20 @@
             document.body.style.overflow = "auto";
         }
 
+        function openWebscraper() {
+            modalWebscraper.style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+        function closeWebscraper() {
+            modalWebscraper.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
         window.onclick = function(event) {
             if (event.target == modalAmbu) closeAmbuBeam();
             if (event.target == modalCab) closeCabBooking();
             if (event.target == modalHuman) closeHuman();
+            if (event.target == modalWebscraper) closeWebscraper();
         }
     </script>
 </body>
