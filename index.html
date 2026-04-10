@@ -448,7 +448,7 @@
                     <a href="https://github.com/VinayakRamKM/CAB-Booking" target="_blank" class="action-btn btn-git">
                         <i class="fab fa-github"></i> GitHub
                     </a>
-                    <a href="javascript:void(0)" class="action-btn btn-more" onclick="openCabBooking()">Read More</a>
+                    <a id="cabBookingReadMore" href="#" class="action-btn btn-more">Read More</a>
                 </div>
             </div>
 
@@ -582,6 +582,16 @@
             if (event.target == modalCab) closeCabBooking();
             if (event.target == modalHuman) closeHuman();
         }
+
+        window.addEventListener('DOMContentLoaded', function() {
+            const cabBtn = document.getElementById('cabBookingReadMore');
+            if (cabBtn) {
+                cabBtn.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    openCabBooking();
+                });
+            }
+        });
     </script>
 </body>
 </html>
