@@ -428,6 +428,19 @@
             
             <div class="project-card">
                 <div class="project-info">
+                    <h3>NotesFlow</h3>
+                    <p>A web application that allows students to seamlessly upload, search, and share study materials and course notes.</p>
+                </div>
+                <div class="project-actions">
+                    <a href="https://github.com/VinayakRamKM/notes-sharing" target="_blank" class="action-btn btn-git">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="javascript:void(0)" class="action-btn btn-more" onclick="openNotesFlow()">Read More</a>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-info">
                     <h3>AmbuBeam</h3>
                     <p>An AI-powered green corridor system designed to prioritize emergency vehicles in traffic.</p>
                 </div>
@@ -506,6 +519,19 @@
         <p>&copy; 2026 K M Vinayak Ram. Built with passion.</p>
     </footer>
 
+    <div id="notesflowModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeNotesFlow()">&times;</span>
+            <h2 style="color: var(--primary);">NotesFlow Project Details</h2>
+            <div class="modal-body">
+                <p>The NotesFlow project focuses on developing a comprehensive note-taking application with real-time collaboration features. The motivation for this work stems from the need for a more efficient and user-friendly solution for managing and sharing notes among teams and individuals. This initiative aims to address the limitations of existing note-taking tools and provide a seamless experience for users.  </p>
+                <p>The Notes Sharing Platform is a web-based portal engineered to help students seamlessly share, organize, and download academic notes and study materials. The platform addresses the common problem students face when trying to find organized, subject-specific resources before exams or during coursework. The platform features subject/category-based filtering, keyword search, and preview capabilities before downloading.   </p>
+                <p>Users can upload notes in multiple formats (such as PDF and documents) and manage their uploads through a personalized dashboard. Built with responsiveness and simplicity in mind, it provides a clean UI/UX for fast navigation on both desktop and mobile devices, helping foster collaborative learning across courses.  </p>
+            </div>
+        </div>
+    </div>
+    
+    
     <div id="ambubeamModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeAmbuBeam()">&times;</span>
@@ -558,10 +584,20 @@
     </div>
 
     <script>
+        const modalnotes = document.getElementById("notesModal");
         const modalAmbu = document.getElementById("ambubeamModal");
         const modalCab = document.getElementById("cabbookingModal");
         const modalHuman = document.getElementById("humanModal");
         const modalWebscraper = document.getElementById("webscraperModal");
+
+        function openNotesFlow() {
+            modalnotes.style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+        function closeNotesFlow() {
+            modalnotes.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
 
         function openAmbuBeam() {
             modalAmbu.style.display = "block";
@@ -591,7 +627,6 @@
         }
 
         function openWebscraper() {
-            console.log("Opening Web Scraper Modal");
             modalWebscraper.style.display = "block";
             document.body.style.overflow = "hidden";
         }
@@ -601,6 +636,7 @@
         }
 
         window.onclick = function(event) {
+            if (event.target == modalnotes) closeNotesFlow();
             if (event.target == modalAmbu) closeAmbuBeam();
             if (event.target == modalCab) closeCabBooking();
             if (event.target == modalHuman) closeHuman();
